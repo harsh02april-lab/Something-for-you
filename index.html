@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;1,700&family=Courier+Prime&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --vintage-brown: #3e2723;
+            --paper-color: #f4e1d2;
+            --soft-pink: #f8bbd0;
+            --deep-black: #1a1a1a;
+            --accent-gold: #c5a059;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--deep-black);
+            color: var(--paper-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Lock Screen --- */
+        #lock-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                        url('https://www.transparenttextures.com/patterns/dark-matter.png'), #1a0f0a;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .vintage-text { font-family: 'Dancing Script', cursive; color: var(--accent-gold); font-size: 3rem; }
+        
+        #countdown {
+            display: flex;
+            gap: 15px;
+            margin: 40px 0;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .time-box {
+            background: rgba(62, 39, 35, 0.4);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--vintage-brown);
+            min-width: 80px;
+            backdrop-filter: blur(5px);
+        }
+
+        .time-box span { display: block; font-size: 2.2rem; color: #fff; }
+        
+        .unlock-btn {
+            padding: 14px 40px;
+            background: transparent;
+            border: 1px solid var(--vintage-brown);
+            color: var(--accent-gold);
+            cursor: not-allowed;
+            font-size: 1.1rem;
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.6;
+        }
+
+        .unlocked {
+            border-color: var(--soft-pink) !important;
+            color: white !important;
+            cursor: pointer !important;
+            opacity: 1 !important;
+            background: rgba(248, 187, 208, 0.1);
+            box-shadow: 0 0 30px rgba(248, 187, 208, 0.2);
+        }
+
+        /* --- Welcome Screen --- */
+        #welcome-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #2c1e14 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+
+        /* --- Memory Corner (Text-Based Scrapbook) --- */
+        .memory-corner {
+            padding: 100px 20px;
+            background: #fdfaf6;
+            color: var(--vintage-brown);
+            text-align: center;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        .memory-card {
+            background: #fff;
+            padding: 40px 20px;
+            border: 1px dashed var(--accent-gold);
+            position: relative;
+            transition: 0.4s;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-10px);
+            background: #fffef0;
+            border-style: solid;
+        }
+
+        .memory-card i { font-size: 2rem; display: block; margin-bottom: 15px; }
+
+        /* --- Heart Touching Message --- */
+        .personal-message {
+            padding: 120px 10%;
+            background: white;
+            color: #333;
+            line-height: 2;
+            font-size: 1.25rem;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        /* --- Why You're Special (Animated List) --- */
+        .special-section {
+            padding: 100px 20px;
+            background: var(--paper-color);
+            color: var(--vintage-brown);
+            text-align: center;
+        }
+
+        .reason-tag {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: 0.5s all ease;
+        }
+
+        .reason-tag.show { opacity: 1; transform: scale(1); }
+
+        /* --- Final Section --- */
+        #final-screen {
+            height: 100vh;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #heart-btn {
+            background: none;
+            border: 1px solid var(--soft-pink);
+            color: var(--soft-pink);
+            padding: 15px 50px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            transition: 0.3s;
+        }
+
+        #heart-btn:hover { background: var(--soft-pink); color: #000; }
+    </style>
+</head>
+<body>
+
+    <!-- LOCK SCREEN -->
+    <section id="lock-screen">
+        <h1 class="vintage-text">A Special Day Is Coming… 🎂❤️</h1>
+        <p style="opacity: 0.7; letter-spacing: 1px;">This little world is waiting for your birthday…</p>
+        
+        <div id="countdown">
+            <div class="time-box"><span id="days">00</span>Days</div>
+            <div class="time-box"><span id="hours">00</span>Hrs</div>
+            <div class="time-box"><span id="minutes">00</span>Min</div>
+            <div class="time-box"><span id="seconds">00</span>Sec</div>
+        </div>
+
+        <p id="lock-msg" style="margin-bottom: 25px;">This surprise unlocks on 20 June 2026 💌</p>
+        <button id="enter-btn" class="unlock-btn" onclick="unlockSite()" disabled>Enter Her World ✨</button>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div id="main-content" style="display:none;">
+        
+        <section id="welcome-screen">
+            <h1 style="font-size: 3.5rem; margin-bottom: 10px;">Happy Birthday babe 🎂❤️</h1>
+            <p style="font-style: italic; max-width: 600px; color: var(--soft-pink);">
+                “Out of all the beautiful things in this world… <br> somehow my favorite became you.”
+            </p>
+            <button class="unlock-btn unlocked" style="margin-top:50px" onclick="document.getElementById('memories').scrollIntoView()">Start Our Story 🌸</button>
+        </section>
+
+        <!-- MEMORY CORNER (NO PHOTOS) -->
+        <section class="memory-corner" id="memories">
+            <h2 class="vintage-text">Our Little Memories ❤️</h2>
+            <p>Every moment with you is a page in my favorite book.</p>
+            <div class="memory-grid">
+                <div class="memory-card"><span>💬</span><h3>First Chat</h3><p>Where it all started...</p></div>
+                <div class="memory-card"><span>📞</span><h3>First Call</h3><p>The night we didn't want to hang up.</p></div>
+                <div class="memory-card"><span>😂</span><h3>First Fight</h3><p>Which only made us stronger.</p></div>
+                <div class="memory-card"><span>🌙</span><h3>Favorite Memory</h3><p>That one quiet moment with just us.</p></div>
+            </div>
+        </section>
+
+        <section class="personal-message">
+            <h2 class="vintage-text" style="font-size: 2.5rem;">Happy Birthday jaan ❤️</h2>
+            <p>I never thought someone could make my life feel this special until you came into it. You turned normal days into beautiful memories and my worst moments into peaceful ones.</p>
+            <p>Thank you for every smile, every late-night talk, every little effort, and every moment you stayed.</p>
+            <p>I hope your birthday is as beautiful, soft, and magical as your heart. 🎂✨</p>
+            <p><i>No matter how many birthdays come... you’ll always remain my favorite person.</i></p>
+        </section>
+
+        <section class="special-section">
+            <h2 class="vintage-text">Why You’re Special 🌷</h2>
+            <div class="reason-tag">Your smile heals me.</div>
+            <div class="reason-tag">You understand my silence.</div>
+            <div class="reason-tag">You make life feel lighter.</div>
+            <div class="reason-tag">You are my safe place.</div>
+            <div class="reason-tag">You're literally home to me.</div>
+        </section>
+
+        <section id="final-screen">
+            <h1 style="font-size: 2.5rem;">Happy Birthday Once Again ❤️</h1>
+            <p style="max-width: 500px; opacity: 0.8; font-style: italic;">No matter where life takes us… <br> a part of my heart will always belong to you.</p>
+            <button id="heart-btn" onclick="spreadHearts()">Forever? 💍✨</button>
+        </section>
+    </div>
+
+    <script>
+        const targetDate = new Date("June 20, 2026 00:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("lock-msg").innerText = "The surprise is ready! 🎁";
+                const btn = document.getElementById("enter-btn");
+                btn.classList.add("unlocked");
+                btn.disabled = false;
+            }
+        }, 1000);
+
+        function unlockSite() {
+            document.getElementById('lock-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 600);
+        }
+
+        // Tag Animation on Scroll
+        window.addEventListener('scroll', () => {
+            const tags = document.querySelectorAll('.reason-tag');
+            tags.forEach(tag => {
+                const tagTop = tag.getBoundingClientRect().top;
+                if(tagTop < window.innerHeight - 50) tag.classList.add('show');
+            });
+        });
+
+        function spreadHearts() {
+            for(let i=0; i<40; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                heart.style.zIndex = '1000';
+                heart.style.transition = `transform ${Math.random() * 2 + 2}s linear, opacity 2s`;
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+                    heart.style.opacity = '0';
+                }, 100);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
